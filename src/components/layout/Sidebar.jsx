@@ -12,7 +12,8 @@ import {
   Activity,
   BarChart3,
   Database,
-  ShoppingCart
+  ShoppingCart,
+  Bell
 } from 'lucide-react';
 import './layout.css';
 
@@ -83,13 +84,36 @@ export const Sidebar = ({ role, activeTab, onTabChange }) => {
         )}
         
         {role === 'supplier' && (
-          <NavLink 
-            to="/supplier" 
-            className={({isActive}) => isActive ? "nav-link active" : "nav-link"} 
-            style={({isActive}) => isActive ? { color: accentColor, backgroundColor: 'rgba(255, 255, 255, 0.05)' } : { color: '#94a3b8' }}
-          >
-            <Zap size={18} /> Operation Control
-          </NavLink>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <button 
+              className={`nav-link ${activeTab === 'overview' ? 'active' : ''}`} 
+              onClick={() => onTabChange('overview')}
+              style={activeTab === 'overview' ? { color: accentColor, backgroundColor: 'rgba(255, 255, 255, 0.05)', width: '100%', textAlign: 'left', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: '14px', fontWeight: 600 } : { color: '#94a3b8', width: '100%', textAlign: 'left', border: 'none', backgroundColor: 'transparent', cursor: 'pointer', fontFamily: 'inherit', fontSize: '14px', fontWeight: 500 }}
+            >
+              <Zap size={18} /> Overview
+            </button>
+            <button 
+              className={`nav-link ${activeTab === 'inventory' ? 'active' : ''}`} 
+              onClick={() => onTabChange('inventory')}
+              style={activeTab === 'inventory' ? { color: accentColor, backgroundColor: 'rgba(255, 255, 255, 0.05)', width: '100%', textAlign: 'left', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: '14px', fontWeight: 600 } : { color: '#94a3b8', width: '100%', textAlign: 'left', border: 'none', backgroundColor: 'transparent', cursor: 'pointer', fontFamily: 'inherit', fontSize: '14px', fontWeight: 500 }}
+            >
+              <Package size={18} /> Inventory & Supply
+            </button>
+            <button 
+              className={`nav-link ${activeTab === 'analytics' ? 'active' : ''}`} 
+              onClick={() => onTabChange('analytics')}
+              style={activeTab === 'analytics' ? { color: accentColor, backgroundColor: 'rgba(255, 255, 255, 0.05)', width: '100%', textAlign: 'left', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: '14px', fontWeight: 600 } : { color: '#94a3b8', width: '100%', textAlign: 'left', border: 'none', backgroundColor: 'transparent', cursor: 'pointer', fontFamily: 'inherit', fontSize: '14px', fontWeight: 500 }}
+            >
+              <Activity size={18} /> Production Analytics
+            </button>
+            <button 
+              className={`nav-link ${activeTab === 'intelligence' ? 'active' : ''}`} 
+              onClick={() => onTabChange('intelligence')}
+              style={activeTab === 'intelligence' ? { color: accentColor, backgroundColor: 'rgba(255, 255, 255, 0.05)', width: '100%', textAlign: 'left', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: '14px', fontWeight: 600 } : { color: '#94a3b8', width: '100%', textAlign: 'left', border: 'none', backgroundColor: 'transparent', cursor: 'pointer', fontFamily: 'inherit', fontSize: '14px', fontWeight: 500 }}
+            >
+              <Bell size={18} /> Intelligence & Alerts
+            </button>
+          </div>
         )}
 
         {role === 'admin' && (
