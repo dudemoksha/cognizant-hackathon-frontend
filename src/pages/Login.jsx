@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
-import { Activity, ChevronDown } from 'lucide-react';
+import { Activity } from 'lucide-react';
 
 export const Login = () => {
   const navigate = useNavigate();
-  const [role, setRole] = useState('consumer');
+  const [searchParams] = useSearchParams();
+  const role = searchParams.get('role') || 'consumer';
 
   const handleLogin = (e) => {
     e.preventDefault();
     if (role === 'consumer') navigate('/consumer');
     if (role === 'supplier') navigate('/supplier');
     if (role === 'admin') navigate('/admin');
+  };
+
+  const getRoleTitle = () => {
+    if (role === 'supplier') return 'Supplier Portal';
+    if (role === 'admin') return 'Admin Portal';
+    return 'Consumer Portal';
   };
 
   return (
@@ -32,8 +38,8 @@ export const Login = () => {
         <div style={{ width: '100%', maxWidth: '420px' }}>
             
             <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-                <h2 className="h-section" style={{ fontSize: '1.75rem', marginBottom: '0.5rem' }}>Login</h2>
-                <p className="text-sub" style={{ fontSize: '14px' }}>Please enter your details to continue.</p>
+                <h2 className="h-section" style={{ fontSize: '1.75rem', marginBottom: '0.5rem' }}>{getRoleTitle()} Login</h2>
+                <p className="text-sub" style={{ fontSize: '14px' }}>Please enter your credentials to access the secure node monitor.</p>
             </div>
 
             <div 
@@ -48,37 +54,6 @@ export const Login = () => {
             >
                 <form onSubmit={handleLogin}>
                     
-                    <div style={{ marginBottom: '1.5rem' }}>
-                        <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '8px' }}>
-                            Platform Role
-                        </label>
-                        <div style={{ position: 'relative' }}>
-                            <select 
-                                value={role} 
-                                onChange={(e) => setRole(e.target.value)}
-                                style={{ 
-                                    width: '100%', 
-                                    padding: '12px 16px', 
-                                    borderRadius: '8px', 
-                                    border: '1px solid var(--border-light)', 
-                                    fontSize: '15px', 
-                                    outline: 'none', 
-                                    appearance: 'none', 
-                                    backgroundColor: 'white', 
-                                    cursor: 'pointer',
-                                    fontWeight: 500
-                                }}
-                            >
-                                <option value="consumer">Consumer</option>
-                                <option value="supplier">Supplier</option>
-                                <option value="admin">System Admin</option>
-                            </select>
-                            <div style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: 'var(--text-secondary)' }}>
-                                <ChevronDown size={18} />
-                            </div>
-                        </div>
-                    </div>
-
                     <div style={{ marginBottom: '1.5rem' }}>
                         <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '8px' }}>
                             Email Address
@@ -108,7 +83,7 @@ export const Login = () => {
                         variant="primary" 
                         style={{ width: '100%', height: '3.5rem', fontSize: '15px', fontWeight: 700, backgroundColor: 'var(--text-primary)', color: 'white', marginTop: '1rem', borderRadius: '8px' }}
                     >
-                        Sign In
+                        Sign In to {role.charAt(0).toUpperCase() + role.slice(1)} Dashboard
                     </Button>
                 </form>
             </div>
