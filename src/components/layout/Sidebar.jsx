@@ -94,21 +94,7 @@ export const Sidebar = ({ role, activeTab, onTabChange }) => {
           </NavLink>
         )}
 
-        <NavLink to="#" className="nav-link" style={{ color: '#94a3b8' }}>
-          <Truck size={18} /> Logistics Flow
-        </NavLink>
-        
-        <NavLink to="#" className="nav-link" style={{ color: '#94a3b8' }}>
-          <Package size={18} /> Node Inventory
-        </NavLink>
 
-        <NavLink to="#" className="nav-link" style={{ color: '#94a3b8' }}>
-          <Users size={18} /> Supplier Mesh
-        </NavLink>
-
-        <NavLink to="#" className="nav-link" style={{ color: '#94a3b8' }}>
-          <FileText size={18} /> Risk Reports
-        </NavLink>
       </nav>
 
       <div style={{ padding: '1.5rem', marginTop: 'auto', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
