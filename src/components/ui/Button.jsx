@@ -1,0 +1,14 @@
+import React from 'react';
+import './ui.css';
+
+export const Button = ({ children, variant = 'primary', onClick, className = '', ...props }) => {
+  return (
+    <button 
+      className={`btn btn-${variant} ${className}`} 
+      onClick={onClick}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
